@@ -7,6 +7,13 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Dialog: typeof import('./src/components/dialog/src/dialog.vue')['default']
+    DialogForm: typeof import('./src/components/dialog/src/dialog-form.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElCol: typeof import('element-plus/es')['ElCol']
+    ElDialog: typeof import('element-plus/es')['ElDialog']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElRow: typeof import('element-plus/es')['ElRow']
+    Form: typeof import('./src/components/form/src/form.vue')['default']
   }
 }

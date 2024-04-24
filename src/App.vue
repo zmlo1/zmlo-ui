@@ -8,7 +8,7 @@
 </template>
 
 <script setup lang="ts">
-import type { FormProps } from "./components/form";
+import type { DialogFormProps } from "./components/dialog";
 import { ref } from "vue";
 import { MlDialogForm } from "./components/dialog";
 
@@ -18,42 +18,49 @@ const onClick = () => {
   dialogFormRef.value?.changeVisible();
 };
 
-const formProps: FormProps = {
-  labelPosition: "right",
-  labelWidth: 120,
-  size: "default",
-
-  formItems: [
-    {
-      label: "Username",
-      prop: "username",
-      span: 12,
-      required: true,
-      component: {
-        name: "el-input",
-        props: {
-          placeholder: "Enter your name",
+const dialogFormProps: DialogFormProps = {
+  form: {
+    labelPosition: "right",
+    labelWidth: 120,
+    size: "default",
+    formItems: [
+      {
+        label: "Username",
+        prop: "username",
+        span: 12,
+        required: true,
+        component: {
+          name: "el-input",
+          props: {
+            placeholder: "Enter your name",
+          },
         },
       },
-    },
-    {
-      label: "Password",
-      prop: "password",
-      required: true,
-      span: 12,
-      component: {
-        name: "el-input",
-        props: {
-          type: "password",
-          placeholder: "Enter your password",
+      {
+        label: "Password",
+        prop: "password",
+        required: true,
+        span: 12,
+        component: {
+          name: "el-input",
+          props: {
+            type: "password",
+            placeholder: "Enter your password",
+          },
         },
       },
+    ],
+  },
+  on: {
+    submit: async ({ data }) => {
+      return new Promise((resolve) => {
+        console.log(data);
+        setTimeout(() => {
+          resolve(false);
+        }, 1000);
+      });
     },
-  ],
-};
-
-const dialogFormProps = {
-  form: formProps,
+  },
 };
 </script>
 

@@ -12,7 +12,9 @@
 
     <template #footer>
       <el-button>{{ cancelText }}</el-button>
-      <el-button type="primary" @click="confirm">{{ confirmText }}</el-button>
+      <el-button type="primary" @click="confirm" :loading="loading">{{
+        confirmText
+      }}</el-button>
     </template>
   </ml-dialog>
 </template>
@@ -35,6 +37,7 @@ export default defineComponent({
   setup(props, { expose }) {
     const mlFormRef = ref<InstanceType<typeof MlForm>>();
     const visible = ref(false);
+    const loading = ref(false);
 
     const changeVisible = (value?: boolean) => {
       if (value !== undefined) {
@@ -45,15 +48,21 @@ export default defineComponent({
       visible.value = !visible.value;
     };
 
-    const confirm = () => {
-      console.log("Confirm");
-      mlFormRef.value?.validate().then((valid) => {
-        if (valid) {
-          console.log("Form is valid");
-        } else {
-          console.log("Form is invalid");
-        }
-      });
+    const confirm = async () => {
+      loading.value = true;
+
+      // Validate form
+      const valid = await mlFormRef.value?.validate();
+      if (!valid) return;
+
+      // Submit form
+      const data = mlFormRef.value?.get();
+      const success = await props.on.submit?.({ data });
+      loading.value = false;
+
+      if (success === false) return;
+
+      visible.value = false;
     };
 
     expose({
@@ -66,6 +75,7 @@ export default defineComponent({
       visible,
       confirm,
       changeVisible,
+      loading,
     };
   },
 });

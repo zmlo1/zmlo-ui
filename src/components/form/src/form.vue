@@ -43,7 +43,6 @@ export default defineComponent({
     const validate = async () => {
       return new Promise((resolve) => {
         elFormRef.value?.validate((valid) => {
-          console.log("Valid", valid);
           resolve(valid);
         });
       });

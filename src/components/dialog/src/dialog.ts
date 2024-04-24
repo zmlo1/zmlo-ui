@@ -15,14 +15,20 @@ export const dialogProps = {
 
 export type DialogProps = ExtractPropTypes<typeof dialogProps>;
 
+export type Func = (arg: any) => Promise<any>;
+
 export const dialogFormProps = {
   title: propTypes.string.def("Title..."),
   cancelText: propTypes.string.def("Cancel"),
   confirmText: propTypes.string.def("Confirm"),
+  on: {
+    type: Object as PropType<Record<string, Func>>,
+    default: () => ({}),
+  },
   form: {
     type: Object as PropType<FormProps>,
     required: true,
   },
 };
 
-export type DialogFormProps = ExtractPropTypes<typeof dialogFormProps>;
+export type DialogFormProps = Partial<ExtractPropTypes<typeof dialogFormProps>>;

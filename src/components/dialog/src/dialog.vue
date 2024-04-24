@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-bind="$props">
+  <el-dialog v-bind="$props" @closed="$emit('closed')">
     <template #header v-if="$slots.header">
       <slot name="header" />
     </template>
@@ -26,6 +26,7 @@ export default defineComponent({
     ElDialog,
   },
   props: dialogProps,
+  emits: ["closed"],
   setup() {
     return {};
   },

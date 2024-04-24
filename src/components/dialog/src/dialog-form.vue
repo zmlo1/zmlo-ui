@@ -1,5 +1,5 @@
 <template>
-  <ml-dialog v-bind="$props" v-model="visible">
+  <ml-dialog v-bind="$props" v-model="visible" @closed="closed">
     <template #header>
       <slot name="header">
         <h3 class="text-lg font-semibold">{{ title }}</h3>
@@ -11,7 +11,7 @@
     </template>
 
     <template #footer>
-      <el-button>{{ cancelText }}</el-button>
+      <el-button @click="cancel">{{ cancelText }}</el-button>
       <el-button type="primary" @click="confirm" :loading="loading">{{
         confirmText
       }}</el-button>
@@ -34,7 +34,8 @@ export default defineComponent({
     MlForm,
   },
   props: dialogFormProps,
-  setup(props, { expose }) {
+  emits: ["vanish"],
+  setup(props, { expose, emit }) {
     const mlFormRef = ref<InstanceType<typeof MlForm>>();
     const visible = ref(false);
     const loading = ref(false);
@@ -48,12 +49,24 @@ export default defineComponent({
       visible.value = !visible.value;
     };
 
-    const confirm = async () => {
-      loading.value = true;
+    const closed = () => {
+      loading.value = false;
+      visible.value = false;
 
+      emit("vanish");
+    };
+
+    const cancel = () => {
+      loading.value = false;
+      visible.value = false;
+    };
+
+    const confirm = async () => {
       // Validate form
       const valid = await mlFormRef.value?.validate();
       if (!valid) return;
+
+      loading.value = true;
 
       // Submit form
       const data = mlFormRef.value?.get();
@@ -73,8 +86,10 @@ export default defineComponent({
     return {
       mlFormRef,
       visible,
-      confirm,
       changeVisible,
+      confirm,
+      cancel,
+      closed,
       loading,
     };
   },

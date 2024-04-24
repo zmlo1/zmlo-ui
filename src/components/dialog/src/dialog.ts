@@ -29,6 +29,9 @@ export const dialogFormProps = {
     type: Object as PropType<FormProps>,
     required: true,
   },
+  onVanish: {
+    type: Function as PropType<() => void>,
+  },
 };
 
 export type DialogFormProps = Partial<ExtractPropTypes<typeof dialogFormProps>>;

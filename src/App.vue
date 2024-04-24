@@ -2,21 +2,13 @@
   <div class="h-[100vh] w-[100vw] bg-[#f2f2f3]">
     <div class="container h-full mx-auto bg-white shadow-sm p-10">
       <el-button @click="onClick">Open Dialog Form</el-button>
-      <ml-dialog-form ref="dialogFormRef" v-bind="dialogFormProps" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { DialogFormProps } from "./components/dialog";
-import { ref } from "vue";
-import { MlDialogForm } from "./components/dialog";
-
-const dialogFormRef = ref<InstanceType<typeof MlDialogForm>>();
-
-const onClick = () => {
-  dialogFormRef.value?.changeVisible();
-};
+import { mlDislogForm } from "./components/dialog";
 
 const dialogFormProps: DialogFormProps = {
   form: {
@@ -61,6 +53,17 @@ const dialogFormProps: DialogFormProps = {
       });
     },
   },
+};
+
+const onClick = () => {
+  mlDislogForm(dialogFormProps, async ({ data }) => {
+    console.log(data);
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(true);
+      }, 1000);
+    });
+  });
 };
 </script>
 

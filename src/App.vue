@@ -12,8 +12,9 @@ import { mlDialogForm } from "./components/dialog";
 
 const dialogFormProps: DialogFormProps = {
   form: {
-    labelPosition: "right",
-    labelWidth: 120,
+    labelPosition: "top",
+    // labelPosition: "right",
+    // labelWidth: 120,
     size: "default",
     formItems: [
       {
@@ -42,16 +43,6 @@ const dialogFormProps: DialogFormProps = {
         },
       },
     ],
-  },
-  on: {
-    submit: async ({ data }) => {
-      return new Promise((resolve) => {
-        console.log(data);
-        setTimeout(() => {
-          resolve(false);
-        }, 1000);
-      });
-    },
   },
 };
 

@@ -24,7 +24,7 @@ export function useDialog(component: any) {
   };
 
   // This function is used to show the dialog
-  const showDialog = (props: any, callback: any, appContext?: AppContext) => {
+  const showDialog = (props: any, appContext?: AppContext) => {
     const container = genContainer();
     const instance = initInstance(
       props,
@@ -33,8 +33,6 @@ export function useDialog(component: any) {
     ) as ComponentInternalInstance;
     const vm: any = instance.proxy;
 
-    props.on = props.on || {};
-    props.on.submit = callback;
     props.onVanish = () => {
       document.body.removeChild(container);
       render(null, container);
@@ -47,12 +45,11 @@ export function useDialog(component: any) {
 
   // This function is used to create a dialog
   const Dialog: any = (props: any, callback: any, appContext?: AppContext) => {
+    props.on = props.on || {};
+    props.on.submit = callback;
+
     return new Promise((resolve, reject) => {
-      const vm = showDialog(
-        props,
-        callback,
-        appContext ?? (Dialog as any)._context
-      );
+      const vm = showDialog(props, appContext ?? (Dialog as any)._context);
 
       instances.set(vm, { props, resolve, reject });
     });

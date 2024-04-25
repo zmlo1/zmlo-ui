@@ -2,7 +2,7 @@
   <ml-dialog v-bind="$props" v-model="visible" @closed="closed">
     <template #header>
       <slot name="header">
-        <h3 class="text-lg font-semibold">{{ title }}</h3>
+        <h3 class="text-sm">{{ title }}</h3>
       </slot>
     </template>
 

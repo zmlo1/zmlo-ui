@@ -10,7 +10,7 @@ export const MlDialogForm = withInstall(DialogForm);
 export type DialogInstance = InstanceType<typeof MlDialog>;
 export type DialogFormInstance = InstanceType<typeof MlDialogForm>;
 
-export { mlDislogForm } from "./src/dialog-form";
+export { mlDialogForm } from "./src/dialog-form";
 export { dialogProps, dialogFormProps } from "./src/dialog";
 
 export default MlDialog;

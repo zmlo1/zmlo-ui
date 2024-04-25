@@ -8,7 +8,7 @@
 
 <script setup lang="ts">
 import type { DialogFormProps } from "./components/dialog";
-import { mlDislogForm } from "./components/dialog";
+import { mlDialogForm } from "./components/dialog";
 
 const dialogFormProps: DialogFormProps = {
   form: {
@@ -56,7 +56,7 @@ const dialogFormProps: DialogFormProps = {
 };
 
 const onClick = () => {
-  mlDislogForm(dialogFormProps, async ({ data }) => {
+  mlDialogForm(dialogFormProps, async ({ data }) => {
     console.log(data);
     return new Promise((resolve) => {
       setTimeout(() => {

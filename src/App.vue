@@ -42,6 +42,39 @@ const dialogFormProps: DialogFormProps = {
           },
         },
       },
+      {
+        prop: "roles",
+        span: 24,
+        component: {
+          name: "forms-table",
+          props: {
+            title: "Roles",
+            columns: [
+              {
+                prop: "role",
+                label: "Role",
+                component: {
+                  name: "el-input",
+                  props: {
+                    placeholder: "Enter a role",
+                    clearable: true,
+                  },
+                },
+              },
+              {
+                prop: "description",
+                label: "Description",
+                component: {
+                  name: "el-input",
+                  props: {
+                    placeholder: "Enter a description",
+                  },
+                },
+              },
+            ],
+          },
+        },
+      },
     ],
   },
 };

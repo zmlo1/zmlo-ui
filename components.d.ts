@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    copy: typeof import('./src/components/table-forms/src/forms-table copy.vue')['default']
     Dialog: typeof import('./src/components/dialog/src/dialog.vue')['default']
     DialogForm: typeof import('./src/components/dialog/src/dialog-form.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
@@ -14,6 +15,11 @@ declare module 'vue' {
     ElDialog: typeof import('element-plus/es')['ElDialog']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElRow: typeof import('element-plus/es')['ElRow']
+    ElSpace: typeof import('element-plus/es')['ElSpace']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElText: typeof import('element-plus/es')['ElText']
     Form: typeof import('./src/components/form/src/form.vue')['default']
+    FormsTable: typeof import('./src/components/table-forms/src/forms-table.vue')['default']
   }
 }

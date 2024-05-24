@@ -21,5 +21,7 @@ declare module 'vue' {
     ElText: typeof import('element-plus/es')['ElText']
     Form: typeof import('./src/components/form/src/form.vue')['default']
     FormsTable: typeof import('./src/components/table-forms/src/forms-table.vue')['default']
+    Table: typeof import('./src/components/table/src/table.vue')['default']
+    TableColumn: typeof import('./src/components/table/src/table-column.vue')['default']
   }
 }

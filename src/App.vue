@@ -1,17 +1,17 @@
 <template>
   <div class="h-[100vh] w-[100vw] bg-[#f2f2f3]">
     <div class="container h-full mx-auto bg-white shadow-sm p-10">
-      <el-button @click="onClick">Open Dialog Form</el-button>
+      <ml-form v-bind="formProps" />
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { DialogFormProps } from "./components/dialog";
-import { mlDialogForm } from "./components/dialog";
+import type { FormProps } from "./components/form";
+import { MlForm } from "./components/form";
 
-const dialogFormProps: DialogFormProps = {
-  form: {
+function useFormProps(): FormProps {
+  return {
     labelPosition: "top",
     // labelPosition: "right",
     // labelWidth: 120,
@@ -43,52 +43,37 @@ const dialogFormProps: DialogFormProps = {
         },
       },
       {
-        prop: "roles",
+        label: "abc",
+        prop: "abc",
         span: 24,
         component: {
-          name: "forms-table",
+          name: "ml-table",
           props: {
-            title: "Roles",
+            placeholder: "Enter abc",
             columns: [
               {
-                prop: "role",
-                label: "Role",
-                component: {
-                  name: "el-input",
-                  props: {
-                    placeholder: "Enter a role",
-                    clearable: true,
-                  },
-                },
+                prop: "date",
+                label: "Date",
+                width: "180",
               },
               {
-                prop: "description",
-                label: "Description",
-                component: {
-                  name: "el-input",
-                  props: {
-                    placeholder: "Enter a description",
-                  },
-                },
+                prop: "name",
+                label: "Name",
+                width: "180",
+              },
+              {
+                prop: "address",
+                label: "Address",
               },
             ],
           },
         },
       },
     ],
-  },
-};
+  };
+}
 
-const onClick = () => {
-  mlDialogForm(dialogFormProps, async ({ data }) => {
-    console.log(data);
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(true);
-      }, 1000);
-    });
-  });
-};
+const formProps = useFormProps();
 </script>
 
 <style scoped></style>
